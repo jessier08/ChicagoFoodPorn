@@ -1,7 +1,4 @@
-//// LOAD DATA////
-queue()
-    .defer(d3.csv,'data/chicago_fp_cleaned.csv', parse)
-    .await(dataLoaded)
+//// CHICAGO FOOD PORN ////
 
 //// DRAWING MAP ////
 var map = L.map('map');
@@ -15,6 +12,7 @@ var map = L.map('map');
         minZoom: 8
     }).addTo(map);
 
+// marker for hovered post
 var newMarker,
     postMarker =  L.icon({
     iconUrl: 'circle.svg',
@@ -22,7 +20,9 @@ var newMarker,
     iconSize:     [10, 10], 
     iconAnchor:   [5, 5]
 });
-//// PLOTTING GRID OF IMAGES//// (imgs is arbritary placeholder for data)
+
+//// PLOTTING GRID OF IMAGES//// 
+//// (imgs is arbritary placeholder for data)
 function imgGallery(imgs){
     var image = d3.select('#gallery')
         .selectAll('.post')
@@ -45,11 +45,17 @@ function imgGallery(imgs){
         })
 }
 
+// set up map structure
+//var placeName = d3.map();
 
+//// LOAD DATA////
+queue()
+    .defer(d3.csv,'data/chicago_fp_cleaned.csv', parse)
+//    .defer(d3.csv,'data/Food_Inspections.csv', parseFood)
+    .await(dataLoaded)
 
 //// WORK WITH DATA////
 function dataLoaded(err,posts){ 
-
     console.log(posts);
     
     // load all posts with page
@@ -129,6 +135,26 @@ function dataLoaded(err,posts){
         }
     })//end button functions
    
+    // scroll back to top of gallery when filter selected
+    $('#all').click(function(){
+        $('#gallery').scrollTop(0);
+    });
+    $('#foodgasm').click(function(){
+        $('#gallery').scrollTop(0);
+    });
+    $('#delicious').click(function(){
+        $('#gallery').scrollTop(0);
+    });
+    $('#yummy').click(function(){
+        $('#gallery').scrollTop(0);
+    });
+    $('#goodeats').click(function(){
+        $('#gallery').scrollTop(0);
+    });
+    $('#tasty').click(function(){
+        $('#gallery').scrollTop(0);
+    });
+    
 //// DRAWING CIRCLES ON MAP ////
 
     var circle = L.icon({
@@ -157,49 +183,16 @@ function dataLoaded(err,posts){
     
     var newTotalArray = totalArray;
 
-//console.log(newTotalArray);
     
-////  tag frequency counter
-//    var words = (function(){
-//
-//        var tagCount = newTotalArray.length; // count w/ duplicates
-//        
-//        // array of words to ignore
-//        var ignore = ['and','the','to','a','of','for','as','i','with','it','is','on','that','this','can','in','be','has','if'];
-//        ignore = (function(){
-//            var o = {}; // object prop checking > in array checking
-//            var iCount = ignore.length;
-//            for (var i=0;i<iCount;i++){
-//                o[ignore[i]] = true;
-//            }
-//            return o;
-//        }());
-//
-//        var counts = {}; // object for math
-//        for (var i=0; i<tagCount; i++) {
-//            var tag = newTotalArray[i];
-//            if (!ignore[tag]) {
-//                counts[tag] = counts[tag] || 0;
-//                counts[tag]++;
-//            }
-//        }
-//
-//        var arr = []; // an array of objects to return
-//        for (tag in counts) {
-//            arr.push({
-//                text: tag,
-//                frequency: counts[tag]
-//            });
-//        }
-//
-//        // sort array by descending frequency | http://stackoverflow.com/a/8837505
-//        var tagCountTotal = arr.sort(function(a,b){
-//            return (a.frequency > b.frequency) ? -1 : ((a.frequency < b.frequency) ? 1 : 0);
-//        });
-//        
-//        console.log(tagC)
-//    }());
+    
+    
 
+    _.each(posts, function(){
+        var place = _.findWhere(restaurants, {"restlatLng": this.latlng, })
+        
+        _.extend(this, place);
+    })
+    
 };
 //end dataLoaded
 
@@ -217,6 +210,15 @@ function parse(d){
         imgTags: imgtagArray,
         userTags: usertagArray,
         likes: +d.likes_coun,
-        url: d.imageURL,
+        url: d.imageURL
     }
 }
+//function parseFood(d){
+//    placeName.set(d.restlatlng, d.name);
+//    
+//    return {
+//        restlatlng: [+d.Latitude, +d.Longitude],
+//        name: d.Name
+//    }
+//    
+//}
