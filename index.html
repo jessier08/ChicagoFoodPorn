@@ -3,45 +3,35 @@
 <head>
     <meta charset="utf-8">
     <title>Chicago Food Porn</title>
-    <link rel="stylesheet" href="style.css"/>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+    <link rel="stylesheet" href="indexStyle.css"/>
+
+	<link rel="stylesheet" href="font/stylesheet.css" type="text/css" charset="utf-8" />
   
-     
+    
 </head>
-    
-    <div id="container">
-        
-        <div id="header">
-            <div id="left">
-                <img src="circle.svg"> 
-                <p>Chicago </p> <p class="foodPorn">#foodPorn</p>
-            </div>
-            
-            <div id="right">
-                <button class="tag" id="foodgasm">#foodgasm</button>
-                <button class="tag" id="delicious">#delicious</button>
-                <button class="tag" id="yummy">#yummy</button>
-                <button class="tag" id="goodeats">#goodeats</button>
-                <button class="tag" id="tasty">#tasty</button>
-                <a href="#gallery"><button class="tag" id="all">reset filter</button></a>
-                
-            </div>
+<body>
+    <div id="splash">
+        <div id="titles">
+            <img class="title fade-in1" src="chicago.png"><br>
+            <img class="title fade-in2" src="food.png"><br>
+            <img class="title fade-in3" src="porn.png">
         </div>
-
-        
-        <div id="map">
+        <div id="enter" class="animation">
+            <p class="intro1 fade-in4">
+             The inside page is the snapshot of a week of Chicago geo-tagged instagram posts, analyzed by a computer to contain food, hashtagged #foodporn by users 
+            </p>
+            <p class="intro2 fade-in5">
+                Hot and tasty dishes are waiting to be seen now
+            </p>
+            <a href="home.html">
+                <p class="button fade-in6">
+                ENTER
+                </p>
+            </a>
         </div>
-        
-        <div id="gallery">
-        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<!--    <script src="animation.js"></script>-->
 
-
-    
-    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="http://d3js.org/queue.v1.min.js"></script>
-    <script src="lib/crossfilter/crossfilter.js"></script>
-    <script type="text/javascript" src="//cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
-    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
-    <script src="script.js"></script>
 </body>
 </html>
